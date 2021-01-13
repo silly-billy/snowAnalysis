@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sillybilly.loginmanager.dao.TSaRolePermissionRelationMapper">
+
+
+    <select id="queryByRoleIds" resultType="com.sillybilly.loginmanager.domain.bo.RoleAndPermissionInfoBO">
+        select tsr.id as id,tsr.role_name as roleName,tsr.update_time as updateTime,tsr.create_time as createTime,tsp.id as permissionId,tsp.permission_name as permissionName from t_sa_role tsr
+        left join t_sa_role_permission_relation tsrpr on tsr.id = tsrpr.role_id
+        left join t_sa_permission tsp on tsrpr.permission_id = tsp.id
+        <where>
+            tsr.deleted = 0 and tsr.id in
+            <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
+                #{roleId}
+            </foreach>
+        </where>
+    </select>
+</mapper>

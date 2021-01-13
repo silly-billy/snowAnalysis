@@ -4,24 +4,23 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- *
+ * 用户表
  * </p>
  *
  * @author sillybilly
- * @since 2021-01-04
+ * @since 2021-01-09
  */
 @Data
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class User implements Serializable {
+public class TSaUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,16 +46,19 @@ public class User implements Serializable {
     private Integer deleted;
 
     /**
-     * 更新时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updateTime;
-
-    /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
+    /**
+     * 修改时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
 
+    /**
+     * 用户包含的角色
+     */
+    private Set<TSaRole> roles;
 }
